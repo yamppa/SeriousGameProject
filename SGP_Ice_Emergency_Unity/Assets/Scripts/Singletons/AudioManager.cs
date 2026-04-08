@@ -4,19 +4,17 @@ public class AudioManager : MonoBehaviour
 {
     public static AudioManager Instance { get; private set; }
 
+    // VIELÄ LISÄTTÄVÄÄ: 3D audio, spatial audio, reverb zones, audio pooling?, audio mixer, etc.
+
     [Header("Audio Data")]
     [SerializeField] private AudioDataSO audioData;
-    [Header("Music & Ambiance")]
+    [Header("Audio Sources")]
     [SerializeField] private AudioSource musicAudioSource;
     [SerializeField] private AudioSource ambianceAudioSource;
-    [Header("SFX")]
-    [Header("Player SFX")]
     [SerializeField] private AudioSource playerFootsteps;
     [SerializeField] private AudioSource playerSFXAudioSource;
-    [Header("NPC SFX")]
     [SerializeField] private AudioSource npcFootsteps;
     [SerializeField] private AudioSource npcSFXAudioSource;
-    [Header("Environment SFX")]
     [SerializeField] private AudioSource environmentSFXAudioSource;
 
 
@@ -115,6 +113,24 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    public void PlayIceCrackingSFX(float volume)
+    {
+        if (audioData.iceCrackingArray.Length > 0)
+        {
+            AudioClip clip = audioData.iceCrackingArray[Random.Range(0, audioData.iceCrackingArray.Length)];
+            PlayEnvironmentSFX(clip, volume, true, false);
+        }
+    }
+
+    public void PlayIceBreakSFX(float volume)
+    {
+        if (audioData.iceBreakSFX.Length > 0)
+        {
+            AudioClip clip = audioData.iceBreakSFX[Random.Range(0, audioData.iceBreakSFX.Length)];
+            PlayEnvironmentSFX(clip, volume, true, false);
+        }
+    }
+
     private void PlayerFootsteps(AudioClip clip, float volume, bool randomPitch, bool loop)
     {
         playerFootsteps.pitch = randomPitch ? Random.Range(0.8f, 1.2f) : 1f;
@@ -178,4 +194,6 @@ public class AudioManager : MonoBehaviour
     }
 
     #endregion
+
+
 }

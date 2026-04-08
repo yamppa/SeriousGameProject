@@ -4,14 +4,25 @@ using UnityEngine;
 [RequireComponent(typeof(Collider))]
 public class ColliderEventTrigger : MonoBehaviour, IEventTrigger
 {
-    public virtual void Start()
+    protected virtual void Start()
     {
         GetComponent<Collider>().isTrigger = true;
     }
 
-    public virtual void OnTriggerEnter(Collider other)
+    protected virtual void OnTriggerEnter(Collider other)
     {
+        // EHK VIEL PLAYER CHECKKI
         TriggerEvent();
+    }
+
+    protected virtual void OnTriggerStay(Collider other)
+    {
+        // PÖÖ
+    }
+
+    protected virtual void OnTriggerExit(Collider other)
+    {
+        // PÄÄ
     }
 
     public virtual void TriggerEvent()

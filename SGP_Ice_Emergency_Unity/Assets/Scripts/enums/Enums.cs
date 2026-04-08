@@ -7,3 +7,15 @@ public enum GameState
     GameOver
 }
 
+public enum InGameState
+{
+    Start,
+    FirstDialogueActive,
+    FistDialogueCompleted,
+    IceBroken,
+    NpcRescued,
+    SecondDialogueActive,
+    SecondDialogueCompleted,
+    None
+}
+
