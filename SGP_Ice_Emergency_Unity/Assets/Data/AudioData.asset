@@ -12,9 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7246a098d7dcb414ba1850706c37e0b2, type: 3}
   m_Name: AudioData
   m_EditorClassIdentifier: Assembly-CSharp::AudioDataSO
-  musicArray: []
-  ambianceArray: []
-  ambianceArray2: []
-  footstepsArray: []
+  musicArray:
+  - {fileID: 8300000, guid: e435a0023132e4f4d82a1907335f540c, type: 3}
+  ambianceArray:
+  - {fileID: 8300000, guid: 81f12596f042c39479263c1c5f6475d4, type: 3}
+  ambianceArray2:
+  - {fileID: 8300000, guid: c89be8f3b36908a468e1fd985d3957e1, type: 3}
+  footstepsArray:
+  - {fileID: 8300000, guid: 697e4d6c78f5024428117abe56bfd3fd, type: 3}
+  - {fileID: 8300000, guid: 7203ec4d01b68b540a5ea8babaeba2ea, type: 3}
+  - {fileID: 8300000, guid: 76f2818ac9b58e2428a97edf96f064d2, type: 3}
+  - {fileID: 8300000, guid: 89a693fff53834f47b712c95efc67a7e, type: 3}
+  - {fileID: 8300000, guid: a9dca0e14a9770748a707120c0cc743b, type: 3}
   iceCrackingArray: []
-  iceBreakSFXs: []
+  iceBreakSFX:
+  - {fileID: 8300000, guid: 08c84cf2ebad1cb4eb1b88d0adc4a986, type: 3}
