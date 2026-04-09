@@ -10,8 +10,16 @@ public class IceBreakTrigger : ColliderEventTrigger
     [SerializeField] private UnityEvent onIceBreak; // EN USKO ET TARVII NYT TEHÄ MITÄÄN CUSTOM EVENTTEJÄ JOTEN UNITYN DEFAULT RIITTÄÄ
                                                     // VÄHÄN RISTIRIIDASSA KUN AUDIO KUTSUTAAN NYT TOLLEEN TOIMIS TOSSA INVOKESSA KANS
 
+    private bool oneShot = true;
+    protected override void Start()
+    {
+        base.Start();
+        oneShot = true;
+    }
     public override void TriggerEvent()
     {
+        if (!oneShot) return;
+
         base.TriggerEvent();
 
         // REPLACE ICE WITH HOLE
@@ -29,5 +37,6 @@ public class IceBreakTrigger : ColliderEventTrigger
         }
 
         onIceBreak?.Invoke();
+        oneShot = false;
     }
 }

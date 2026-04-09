@@ -10,7 +10,8 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioDataSO audioData;
     [Header("Audio Sources")]
     [SerializeField] private AudioSource musicAudioSource;
-    [SerializeField] private AudioSource ambianceAudioSource;
+    [SerializeField] private AudioSource ambianceAudioSource1;
+    [SerializeField] private AudioSource ambianceAudioSource2;
     [SerializeField] private AudioSource playerFootsteps;
     [SerializeField] private AudioSource playerSFXAudioSource;
     [SerializeField] private AudioSource npcFootsteps;
@@ -34,10 +35,17 @@ public class AudioManager : MonoBehaviour
         if (musicAudioSource != null)
         {
             PlayMusic(0.5f);
+            Debug.Log("Playing music");
         }
-        if (ambianceAudioSource != null)
+        if (ambianceAudioSource1 != null)
         {
-            PlayAmbiance(0.5f);
+            PlayAmbiance1(0.3f);
+            Debug.Log("Playing ambiance 1");
+        }
+        if (ambianceAudioSource2 != null)
+        {
+            PlayAmbiance2(0.3f);
+            Debug.Log("Playing ambiance 2");
         }
     }
 
@@ -56,14 +64,27 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public void PlayAmbiance(float volume)
+    public void PlayAmbiance1(float volume)
     {
         if (audioData.ambianceArray.Length > 0)
         {
             AudioClip clip = audioData.ambianceArray[Random.Range(0, audioData.ambianceArray.Length)];
-            ambianceAudioSource.clip = clip;
-            ambianceAudioSource.volume = volume;
-            ambianceAudioSource.Play();
+            ambianceAudioSource1.clip = clip;
+            ambianceAudioSource1.volume = volume;
+            ambianceAudioSource1.loop = true;
+            ambianceAudioSource1.Play();
+        }
+    }
+
+    public void PlayAmbiance2(float volume)
+    {
+        if (audioData.ambianceArray2.Length > 0)
+        {
+            AudioClip clip = audioData.ambianceArray2[Random.Range(0, audioData.ambianceArray2.Length)];
+            ambianceAudioSource2.clip = clip;
+            ambianceAudioSource2.volume = volume;
+            ambianceAudioSource2.loop = true;
+            ambianceAudioSource2.Play();
         }
     }
 
@@ -72,14 +93,14 @@ public class AudioManager : MonoBehaviour
         musicAudioSource.volume = volume;
     }
 
-    public void ChangeAmbianceVolume(float volume)
+    public void ChangeAmbiance1Volume(float volume)
     {
-        ambianceAudioSource.volume = volume;
+        ambianceAudioSource1.volume = volume;
     }
 
-    public void StopAmbiance()
+    public void StopAmbiance1()
     {
-        ambianceAudioSource.Stop();
+        ambianceAudioSource1.Stop();
     }
 
     public void StopMusic()
