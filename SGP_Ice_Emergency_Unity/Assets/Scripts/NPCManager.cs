@@ -48,12 +48,12 @@ public class NPCManager : MonoBehaviour
             }
         }
 
-        machine.state.DoAll();
+        state.DoAll();
     }
 
     private void FixedUpdate()
     {
-        machine.state.FixedDoAll();
+        state.FixedDoAll();
     }
 
     public void GoToNextSpot()
