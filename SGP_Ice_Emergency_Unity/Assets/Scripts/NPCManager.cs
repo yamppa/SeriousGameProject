@@ -6,9 +6,11 @@ public class NPCManager : MonoBehaviour
 {
     [Header("Components")]
     public GameObject dialogueCanvas;
+    public GameObject aftercareCanvas;
     public Rigidbody body;
     public Animator animator;
     public StateMachine machine;
+    public Transform model;
 
 
 
@@ -18,6 +20,8 @@ public class NPCManager : MonoBehaviour
     [Header("States")]
     public Idle idle;
     public Navigate navigate;
+    public Rescue rescue;
+    public Aftercare aftercare;
 
     private State state => machine.state;
 
@@ -35,6 +39,7 @@ public class NPCManager : MonoBehaviour
     {
         SetupInstances();
         CloseDialogue();
+        aftercareCanvas.SetActive(false);
         Set(idle);
     }
 
@@ -45,6 +50,10 @@ public class NPCManager : MonoBehaviour
             if (state == navigate)
             {
                 Set(idle);
+            }
+            else if (state == rescue)
+            {
+                Set(aftercare,true);
             }
         }
 
@@ -77,6 +86,17 @@ public class NPCManager : MonoBehaviour
         dialogueCanvas.SetActive(false);
     }
     #endregion
+
+
+    public void FallInIce()
+    {
+        Set(rescue,true);
+    }
+
+    public void StartAftercareDialogue()
+    {
+        aftercareCanvas.SetActive(true);
+    }
 
     protected void Set(State newState, bool forceReset = false)
     {
