@@ -18,6 +18,7 @@ public class Rescue : State
 
     public override void Enter()
     {
+        core.body.useGravity = false;
         core.body.linearVelocity = Vector3.zero;
         core.transform.position = hole.position;
         rescueCollider.enabled = true;
@@ -26,6 +27,8 @@ public class Rescue : State
         flag = false;
         timer = 0f;
         //animaiton
+
+        ScoreManager.Instance.StartRescueTimer();
     }
 
     public override void Do()
@@ -70,6 +73,7 @@ public class Rescue : State
     public override void Exit()
     {
         rescueCollider.enabled = false;
+        ScoreManager.Instance.StopRescueTimer();
     }
 
 

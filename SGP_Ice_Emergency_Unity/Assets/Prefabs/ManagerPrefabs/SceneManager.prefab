@@ -44,3 +44,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69f79642fa0ff8f4b83bc63ff465187c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneManager
+  sceneToLoad: {fileID: 102900000, guid: 5f3266f8cb70a4c458b0af55e23fb132, type: 3}

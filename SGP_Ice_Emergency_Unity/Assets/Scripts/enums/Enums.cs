@@ -19,3 +19,9 @@ public enum InGameState
     None
 }
 
+public enum Language
+{
+    Suomi,
+    English
+}
+

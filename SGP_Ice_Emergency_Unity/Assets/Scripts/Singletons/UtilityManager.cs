@@ -24,4 +24,7 @@ public class UtilityManager : MonoBehaviour
     public GameObject GetPlayer() => player;
     public GameObject GetNPC() => npc;
 
+    public void SetPlayer(GameObject newPlayer) => player = newPlayer;
+    public void SetNPC(GameObject newNPC) => npc = newNPC;
+
 }

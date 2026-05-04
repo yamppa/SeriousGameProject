@@ -6,8 +6,11 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 99c9720ab356a0642a771bea13969a05
+    path: Assets/Scenes/Lake2.unity
+    guid: 6a47dd65bce7d284592a97618f2d295d
+  - enabled: 1
+    path: Assets/Scenes/ReloadScene.unity
+    guid: 5f3266f8cb70a4c458b0af55e23fb132
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 6292b2904a278f340bf94634f072af77, type: 2}
