@@ -16,6 +16,17 @@ public class IceBreakTrigger : ColliderEventTrigger
         base.Start();
         oneShot = true;
     }
+
+    protected override void OnTriggerEnter(Collider other)
+    {
+        NPCManager npc = other.GetComponent<NPCManager>();
+
+        if (npc != null)
+        {
+            TriggerEvent();
+            npc.FallInIce();
+        }
+    }
     public override void TriggerEvent()
     {
         if (!oneShot) return;

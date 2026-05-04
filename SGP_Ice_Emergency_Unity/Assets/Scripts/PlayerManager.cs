@@ -1,5 +1,6 @@
 using Oculus.Interaction.Locomotion;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -17,6 +18,13 @@ public class PlayerManager : MonoBehaviour
             // Play footstep sound
             AudioManager.Instance.PlayPlayerFootsteps(0.5f);
             Debug.Log("Playing footstep sound");
+        }
+
+        if (InputSystem.actions["Crouch"].WasPressedThisFrame())
+        {
+            // Play interaction sound
+            fpl.ToggleCrouch();
+            Debug.Log("Toggling crouch");
         }
     }
 }

@@ -11,7 +11,7 @@ public class ColliderEventTrigger : MonoBehaviour, IEventTrigger
 
     protected virtual void OnTriggerEnter(Collider other)
     {
-        // EHK VIEL PLAYER CHECKKI
+        // EHK VIEL PLAYER CHECKKI, on child classeis
         TriggerEvent();
     }
 

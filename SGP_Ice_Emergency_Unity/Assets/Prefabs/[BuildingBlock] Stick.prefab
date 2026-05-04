@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Meta.XR.BuildingBlocks::Meta.XR.BuildingBlocks.BuildingBlock
   blockId: f8766c17-aaf8-4b55-9431-de8deea83842
-  instanceId: 7cb0fed1-f604-4dc8-91c0-d5990fcb65dc
+  instanceId: 49829705-89ed-460b-a7e5-d8ffaa5fedb8
   version: 1
   installationRoutineCheckpoint:
     _installationRoutineId: f8338144-8280-4ff6-9455-ae2bb9c20fe8
@@ -134,8 +134,8 @@ GameObject:
   - component: {fileID: 5430999924015809390}
   - component: {fileID: 1092164401968714330}
   m_Layer: 0
-  m_Name: '[BuildingBlock] Cube'
-  m_TagString: Untagged
+  m_Name: '[BuildingBlock] Stick'
+  m_TagString: Stick
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -169,7 +169,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Meta.XR.BuildingBlocks::Meta.XR.BuildingBlocks.BuildingBlock
   blockId: 7358e191-33b7-43ca-b066-b2f00531ac66
-  instanceId: 6e192149-df10-42f6-8dcd-754c0e25bd8a
+  instanceId: 8194e078-d5f6-4822-821a-9afbde3b940e
   version: 1
   installationRoutineCheckpoint:
     _installationRoutineId: 

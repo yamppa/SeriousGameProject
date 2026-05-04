@@ -16,6 +16,14 @@ public class DialogueTrigger : ColliderEventTrigger
         }
     }
 
+    protected override void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            TriggerEvent();
+        }
+    }
+
     protected override void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))
