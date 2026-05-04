@@ -70,7 +70,9 @@ public class Navigate : State
     {
         if (hasRotatedTowardsPlayer)
         {
+            
             core.ShowDialogue();
+            
             isComplete = true;  
         }
     }

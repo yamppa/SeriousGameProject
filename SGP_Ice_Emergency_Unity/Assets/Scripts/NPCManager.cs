@@ -5,8 +5,8 @@ using System.Collections.Generic;
 public class NPCManager : MonoBehaviour
 {
     [Header("Components")]
-    public GameObject dialogueCanvas;
-    public GameObject aftercareCanvas;
+    public GameObject[] dialogueCanvas;
+    public GameObject[] aftercareCanvas;
     public Rigidbody body;
     public Animator animator;
     public StateMachine machine;
@@ -23,6 +23,9 @@ public class NPCManager : MonoBehaviour
     public Rescue rescue;
     public Aftercare aftercare;
 
+    private int currentDialogueIndex = 0;
+    private int currentAftercareIndex = 0;
+
     private State state => machine.state;
 
     public List<Transform> spots = new List<Transform>();
@@ -33,13 +36,15 @@ public class NPCManager : MonoBehaviour
     {
         body = GetComponent<Rigidbody>();
         // Animator.
+        currentDialogueIndex = 0;
+        currentAftercareIndex = 0;
     }
 
     private void Start()
     {
         SetupInstances();
-        CloseDialogue();
-        aftercareCanvas.SetActive(false);
+        dialogueCanvas[currentDialogueIndex].SetActive(false);
+        aftercareCanvas[currentAftercareIndex].SetActive(false);
         Set(idle);
     }
 
@@ -76,14 +81,38 @@ public class NPCManager : MonoBehaviour
         }
     }
 
-    #region Dialogue
+    #region Dialogue / Aftercare
     public void ShowDialogue()
     {
-        dialogueCanvas.SetActive(true);
+        if (state == aftercare)
+        {
+            StartAftercareDialogue();
+            return;
+        }
+
+        dialogueCanvas[currentDialogueIndex].SetActive(true);
     }
     public void CloseDialogue()
     {
-        dialogueCanvas.SetActive(false);
+        dialogueCanvas[currentDialogueIndex].SetActive(false);
+        currentDialogueIndex++;
+    }
+
+    public void ShowAftercare()
+    {
+        aftercareCanvas[currentAftercareIndex].SetActive(true);
+    }
+
+    public void CloseAftercare()
+    {
+        aftercareCanvas[currentAftercareIndex].SetActive(false);
+        currentAftercareIndex++;
+    }
+
+    public void NextAftercare()
+    {
+        CloseAftercare();
+        ShowAftercare();
     }
     #endregion
 
@@ -95,7 +124,7 @@ public class NPCManager : MonoBehaviour
 
     public void StartAftercareDialogue()
     {
-        aftercareCanvas.SetActive(true);
+        aftercareCanvas[currentAftercareIndex].SetActive(true);
     }
 
     protected void Set(State newState, bool forceReset = false)
@@ -111,4 +140,6 @@ public class NPCManager : MonoBehaviour
         foreach (State state in allChildStates)
         { state.SetCore(this); }
     }
+
+    
 }

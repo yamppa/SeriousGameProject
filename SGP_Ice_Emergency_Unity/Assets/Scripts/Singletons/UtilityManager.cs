@@ -17,6 +17,7 @@ public class UtilityManager : MonoBehaviour
             return;
         }
         instance = this;
+        DontDestroyOnLoad(gameObject);
     }
 
     public LayerMask GetWhatIsGround() => whatIsGround;
