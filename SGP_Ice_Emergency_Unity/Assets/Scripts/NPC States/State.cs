@@ -7,6 +7,8 @@ public abstract class State : MonoBehaviour
     protected float startTime;
     public float time => Time.time - startTime;
 
+    public AnimationClip anim;
+
 
     protected NPCManager core;
     protected Rigidbody body => core.body;

@@ -35,6 +35,18 @@ public class AudioManager : MonoBehaviour
         StartMusic();
     }
 
+    public void ToggleDramatic(bool isOn)
+    {
+        if (isOn)
+        {
+            PlayMusic(1,1); // Oletetaan, että index 1 on dramaattinen musiikki
+        }
+        else
+        {
+            PlayMusic(0.5f, 0);
+        }
+    }
+
     public void SetPlayerFootSource(AudioSource source) => playerFootsteps = source;
     public void SetNPCFootSource(AudioSource source) => npcFootsteps = source;
     public void SetEnviroSFXSource(AudioSource source) => environmentSFXAudioSource = source;
@@ -43,7 +55,7 @@ public class AudioManager : MonoBehaviour
     {
         if (musicAudioSource != null)
         {
-            PlayMusic(0.5f);
+            PlayMusic(0.5f, 0);
             Debug.Log("Playing music");
         }
         if (ambianceAudioSource1 != null)
@@ -61,11 +73,11 @@ public class AudioManager : MonoBehaviour
 
     #region music & ambiance methods
 
-    public void PlayMusic(float volume)
+    public void PlayMusic(float volume, int index)
     {
         if (audioData.musicArray.Length > 0)
         {
-            AudioClip clip = audioData.musicArray[Random.Range(0, audioData.musicArray.Length)];
+            AudioClip clip = audioData.musicArray[index];
             musicAudioSource.clip = clip;
             musicAudioSource.volume = volume;
             musicAudioSource.Play();
@@ -133,7 +145,7 @@ public class AudioManager : MonoBehaviour
 
     public void PlayNPCFootsteps(float volume)
     {
-        if (playerFootsteps.isPlaying) return;
+        if (npcFootsteps.isPlaying) return;
 
         if (audioData.footstepsArray.Length > 0)
         {

@@ -18,6 +18,8 @@ public class Rescue : State
 
     public override void Enter()
     {
+        AudioManager.Instance.ToggleDramatic(true);
+
         core.body.useGravity = false;
         core.body.linearVelocity = Vector3.zero;
         core.transform.position = hole.position;
@@ -27,6 +29,8 @@ public class Rescue : State
         flag = false;
         timer = 0f;
         //animaiton
+        core.animator.Play(anim.name);
+        core.bodyCollider.enabled = false;
 
         ScoreManager.Instance.StartRescueTimer();
     }
@@ -51,7 +55,7 @@ public class Rescue : State
 
     public override void FixedDo()
     {
-       
+       RotateTowards(UtilityManager.instance.GetPlayer().transform.position - core.model.position);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -74,6 +78,28 @@ public class Rescue : State
     {
         rescueCollider.enabled = false;
         ScoreManager.Instance.StopRescueTimer();
+    }
+
+
+    private void RotateTowards(Vector3 targetDir)
+    {
+        if (targetDir == Vector3.zero) return;
+
+        // Explicitly use Vector3.up to lock the rotation to the Y axis
+        Quaternion lookRotation = Quaternion.LookRotation(targetDir, Vector3.up);
+
+        Quaternion targetRotation = lookRotation * Quaternion.Euler(0, 90, 0);
+
+        // Slerp towards the target rotation
+        core.model.rotation = Quaternion.Slerp(core.model.rotation, targetRotation, 5 * Time.fixedDeltaTime);
+
+        // Check if we are "close enough" to stop rotating and start moving
+        if (Quaternion.Angle(core.model.rotation, targetRotation) < 1f)
+        {
+            // Snap to exact rotation to prevent minor drifting
+            core.model.rotation = targetRotation;
+            
+        }
     }
 
 

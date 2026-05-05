@@ -12,6 +12,7 @@ public class NPCManager : MonoBehaviour
     public TMP_Text correctAnswersText;
     public TMP_Text scoreText;
     public Rigidbody body;
+    public Collider bodyCollider;
     public Animator animator;
     public StateMachine machine;
     public Transform model;
@@ -26,6 +27,7 @@ public class NPCManager : MonoBehaviour
     public Idle idle;
     public Navigate navigate;
     public Rescue rescue;
+    public Crawl crawl;
     public Aftercare aftercare;
 
     private int currentDialogueIndex = 0;
@@ -67,12 +69,22 @@ public class NPCManager : MonoBehaviour
             }
             else if (state == rescue)
             {
-                Set(aftercare,true);
+                Set(crawl, true);
+            }
+            else if (state == crawl)
+            {
+                Set(aftercare, true);
             }
         }
 
         state.DoAll();
+
+        if (body.linearVelocity.magnitude > 0.1f)
+        {
+            AudioManager.Instance.PlayNPCFootsteps(0.5f);
+        }
     }
+        
 
     private void FixedUpdate()
     {

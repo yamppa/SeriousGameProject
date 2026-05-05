@@ -14,9 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AudioDataSO
   musicArray:
   - {fileID: 8300000, guid: e435a0023132e4f4d82a1907335f540c, type: 3}
+  - {fileID: 8300000, guid: 648051b7b084cf04e948f1638a9d5527, type: 3}
   ambianceArray:
   - {fileID: 8300000, guid: 81f12596f042c39479263c1c5f6475d4, type: 3}
-  ambianceArray2: []
+  ambianceArray2:
+  - {fileID: 8300000, guid: 5544adf5c4138a2498d51a444a02a684, type: 3}
   footstepsArray:
   - {fileID: 8300000, guid: 697e4d6c78f5024428117abe56bfd3fd, type: 3}
   - {fileID: 8300000, guid: 7203ec4d01b68b540a5ea8babaeba2ea, type: 3}

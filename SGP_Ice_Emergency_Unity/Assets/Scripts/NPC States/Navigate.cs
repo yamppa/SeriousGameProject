@@ -22,6 +22,8 @@ public class Navigate : State
         hasRotatedTowardsPlayer = false;
 
         Debug.Log("Entering Navigate state. Heading to: " + target.name);
+
+        core.animator.Play(anim.name);
     }
 
     public override void FixedDo()
@@ -51,7 +53,9 @@ public class Navigate : State
         if (targetDir == Vector3.zero) return;
 
         // Explicitly use Vector3.up to lock the rotation to the Y axis
-        Quaternion targetRotation = Quaternion.LookRotation(targetDir, Vector3.up);
+        Quaternion lookRotation = Quaternion.LookRotation(targetDir, Vector3.up);
+
+        Quaternion targetRotation = lookRotation * Quaternion.Euler(0, 90, 0);
 
         // Slerp towards the target rotation
         core.model.rotation = Quaternion.Slerp(core.model.rotation, targetRotation, rotationSpeed * Time.fixedDeltaTime);

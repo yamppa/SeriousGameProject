@@ -1,17 +1,31 @@
 using UnityEngine;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 
 public class SceneLoader : MonoBehaviour
 {
+#if UNITY_EDITOR
     [SerializeField] private SceneAsset sceneToLoad;
+#endif
+    string sceneName;
 
+#if UNITY_EDITOR
+    private void OnValidate()
+    {
+        if (sceneToLoad != null)
+        {
+            sceneName = sceneToLoad.name;
+        }
+    }
+#endif
 
 
     public void LoadScene()
     {
-        if (sceneToLoad != null)
+        if (sceneName != null)
         {
-            SceneManager.Instance.LoadScene(sceneToLoad);
+            SceneManager.Instance.LoadScene(sceneName);
         }
         else
         {

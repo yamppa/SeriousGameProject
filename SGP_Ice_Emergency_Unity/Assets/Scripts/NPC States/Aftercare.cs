@@ -9,7 +9,9 @@ public class Aftercare : State
 
     public override void Enter()
     {
+        AudioManager.Instance.ToggleDramatic(false);
         core.transform.position = recoverySpot.position;
+        core.bodyCollider.enabled = true;
         core.body.useGravity = true;
 
         navigate.target = aftercareSpot;

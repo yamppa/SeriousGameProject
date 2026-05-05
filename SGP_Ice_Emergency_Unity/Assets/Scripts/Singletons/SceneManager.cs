@@ -1,11 +1,27 @@
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 using UnityEngine;
-using UnityEngine.SceneManagement;
+
 public class SceneManager : MonoBehaviour
 {
     public static SceneManager Instance { get; private set; }
-
+#if UNITY_EDITOR
     [SerializeField] private SceneAsset sceneToLoad;
+#endif
+
+    string sceneName;
+
+
+#if UNITY_EDITOR
+    private void OnValidate()
+    {
+        if (sceneToLoad != null)
+        {
+            sceneName = sceneToLoad.name;
+        }
+    }
+#endif
 
     private void Awake()
     {
@@ -20,11 +36,11 @@ public class SceneManager : MonoBehaviour
         }
     }
 
-    public void LoadScene(SceneAsset scene)
+    public void LoadScene(string scene)
     {
         if (scene != null)
         {
-            UnityEngine.SceneManagement.SceneManager.LoadScene(scene.name);
+            UnityEngine.SceneManagement.SceneManager.LoadScene(scene);
         }
         else
         {
@@ -34,7 +50,7 @@ public class SceneManager : MonoBehaviour
 
     public void RestartScene()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene(sceneToLoad.name);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
     }
 
 
