@@ -32,6 +32,15 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
+        StartMusic();
+    }
+
+    public void SetPlayerFootSource(AudioSource source) => playerFootsteps = source;
+    public void SetNPCFootSource(AudioSource source) => npcFootsteps = source;
+    public void SetEnviroSFXSource(AudioSource source) => environmentSFXAudioSource = source;
+
+    public void StartMusic()
+    {
         if (musicAudioSource != null)
         {
             PlayMusic(0.5f);
@@ -48,7 +57,6 @@ public class AudioManager : MonoBehaviour
             Debug.Log("Playing ambiance 2");
         }
     }
-
 
 
     #region music & ambiance methods

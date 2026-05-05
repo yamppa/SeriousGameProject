@@ -21,6 +21,13 @@ public class ScoreManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
+    public void Reset()
+    {
+        score = 0f;
+        rescueTimer = 0f;
+        rescueTimerActive = false;
+    }
+
     private void Start()
     {
         score = 0f;

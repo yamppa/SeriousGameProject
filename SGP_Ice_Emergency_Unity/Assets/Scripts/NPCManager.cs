@@ -1,18 +1,23 @@
 using Unity.VisualScripting;
 using UnityEngine;
 using System.Collections.Generic;
+using TMPro;
 
 public class NPCManager : MonoBehaviour
 {
     [Header("Components")]
     public GameObject[] dialogueCanvas;
     public GameObject[] aftercareCanvas;
+    public GameObject scoreCanvas;
+    public TMP_Text correctAnswersText;
+    public TMP_Text scoreText;
     public Rigidbody body;
     public Animator animator;
     public StateMachine machine;
     public Transform model;
 
-
+    [Header("Language")]
+    public Language language;
 
     [Header("Stats")]
     public float movementSpeed = 5f;
@@ -30,6 +35,8 @@ public class NPCManager : MonoBehaviour
 
     public List<Transform> spots = new List<Transform>();
 
+    private int correctAnswers = 0;
+
 
 
     private void Awake()
@@ -38,6 +45,7 @@ public class NPCManager : MonoBehaviour
         // Animator.
         currentDialogueIndex = 0;
         currentAftercareIndex = 0;
+        correctAnswers = 0;
     }
 
     private void Start()
@@ -45,6 +53,7 @@ public class NPCManager : MonoBehaviour
         SetupInstances();
         dialogueCanvas[currentDialogueIndex].SetActive(false);
         aftercareCanvas[currentAftercareIndex].SetActive(false);
+        scoreCanvas.SetActive(false);
         Set(idle);
     }
 
@@ -125,6 +134,52 @@ public class NPCManager : MonoBehaviour
     public void StartAftercareDialogue()
     {
         aftercareCanvas[currentAftercareIndex].SetActive(true);
+    }
+
+    public void CorrectAnswer()
+    {
+        ScoreManager.Instance.AddPoint();
+        correctAnswers++;
+    }
+
+    public int GetCorrectAnswers()
+    {
+        return correctAnswers;
+    }
+
+    public void ScoreBoard()
+    {
+        CloseAftercare();
+        CalculateScore();
+        scoreCanvas.SetActive(true);
+    }
+
+    private void CalculateScore()
+    {
+        float totalScore = ScoreManager.Instance.GetTotalScore();
+
+        if (language == Language.English)
+        {
+            scoreText.text = $"Final Score: {totalScore:F2}";
+            correctAnswersText.text = $"Correct Answers: {correctAnswers}";
+        }
+        else if (language == Language.Suomi)
+        {
+            scoreText.text = $"Pisteet: {totalScore:F2}";
+            correctAnswersText.text = $"Oikeat Vastaukset: {correctAnswers}";
+        }
+        
+    }
+
+    public void ResetGame()
+    {
+        Debug.Log("Resetting game...");
+        ScoreManager.Instance.Reset();
+        currentDialogueIndex = 0;
+        currentAftercareIndex = 0;
+        correctAnswers = 0;
+        scoreCanvas.SetActive(false);
+        SceneManager.Instance.RestartScene();
     }
 
     protected void Set(State newState, bool forceReset = false)

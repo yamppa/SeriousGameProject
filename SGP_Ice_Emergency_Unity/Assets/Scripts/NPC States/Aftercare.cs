@@ -10,8 +10,8 @@ public class Aftercare : State
     public override void Enter()
     {
         core.transform.position = recoverySpot.position;
-        
-        
+        core.body.useGravity = true;
+
         navigate.target = aftercareSpot;
         Set(navigate);
     }
